@@ -185,14 +185,14 @@ const BarChart = ({ isDashboard = false }) => {
             anchor: 'bottom-right',
             direction: 'column',
             justify: false,
-            translateX: 120,
+            translateX: 130,
             translateY: 0,
-            itemsSpacing: 2,
-            itemWidth: 100,
+            itemsSpacing: 0,
+            itemWidth: 130,
             itemHeight: 20,
             itemDirection: 'left-to-right',
             itemOpacity: 0.85,
-            symbolSize: 20,
+            symbolSize: 10,
             effects: [
               {
                 on: 'hover',
