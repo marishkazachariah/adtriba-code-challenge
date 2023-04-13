@@ -1,8 +1,33 @@
-# Getting Started with Create React App
+# Atriba Code Challenge
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Packages used
+
+- [uuid](https://github.com/uuidjs/uuid) for troubleshooting unique ids for the Sample Data table
+- [emotion](https://emotion.sh/docs/styled) + [mui](https://mui.com/material-ui/) for styling, components and theme
+- [nivo](https://nivo.rocks/) for displaying charts
+
+## Method
+
+Based on the time given and a pretty open interpretation of how the data can be displayed, I decided to go with two different graphs that can be interactable and changeable to compare and contrast data through different variations of dynamic manipulation and interactivity/filtering
+The bar graph represents data spans across all the dates provided and totaling the `attributed_conversions`, `attributed_revenue` and `spends`
+The pie chart can be categorized between the many different types of advertising sources, optimisation target, and type, toting up all the `attributed_conversions`, `attributed_revenue` and `spends` from all 6 months.
+Both these graphs can be viewed and interacted with in greater detail when clicking on the graphs on the sidebar. Otherwise, the dashboard shows an overarching feature with a couple stats highlighting to the user any averages and comparisons in a wider view.
+
+## Nice to haves
+
+- would add tests for components and functions
+
+- sort out components better. break it down for better reusability and readability
+
+- having trouble with MUI date picker and didn’t want to fuss on it, putting more focus on dynamic interactability
+
+- improved readability of dates - either set a limit on the graph or adjust the font/styling
+
+- working on backend implementation for generating the `.csv` file into a proper database
+
+## React App Scripts
 
 In the project directory, you can run:
 
