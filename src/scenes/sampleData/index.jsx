@@ -39,12 +39,10 @@ const SampleData = () => {
       type: 'currency',
       headerAlign: 'left',
       align: 'left',
-      // flex: 1,
     },
     {
       field: 'partition_id',
       headerName: 'Partition ID',
-      // flex: 1,
     },
     {
       field: 'optimisation_target',
