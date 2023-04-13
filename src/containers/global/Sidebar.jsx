@@ -104,7 +104,7 @@ const Sidebar = () => {
               Charts
             </Typography>
             <Item
-              title="Bar Chart"
+              title="Bar Graph"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
