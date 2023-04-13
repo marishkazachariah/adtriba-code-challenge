@@ -1,16 +1,14 @@
-import { useState } from "react"
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar"
-import { Box, IconButton, Typography, useTheme } from "@mui/material"
-import { Link } from "react-router-dom"
-import "react-pro-sidebar/dist/css/styles.css"
-import { tokens } from "../../theme"
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined"
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined"
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined"
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined"
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
-import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined"
+import { useState } from 'react'
+import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar'
+import { Box, IconButton, Typography, useTheme } from '@mui/material'
+import { Link } from 'react-router-dom'
+import 'react-pro-sidebar/dist/css/styles.css'
+import { tokens } from '../../theme'
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined'
+import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined'
+import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined'
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
@@ -35,25 +33,25 @@ const Sidebar = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [isCollapsed, setIsCollapsed] = useState(false)
-  const [selected, setSelected] = useState("Dashboard")
+  const [selected, setSelected] = useState('Dashboard')
 
   return (
     <Box
       sx={{
-        "& .pro-sidebar-inner": {
+        '& .pro-sidebar-inner': {
           background: `${colors.primary[400]} !important`,
         },
-        "& .pro-icon-wrapper": {
-          backgroundColor: "transparent !important",
+        '& .pro-icon-wrapper': {
+          backgroundColor: 'transparent !important',
         },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
+        '& .pro-inner-item': {
+          padding: '5px 35px 5px 20px !important',
         },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+        '& .pro-inner-item:hover': {
+          color: '#868dfb !important',
         },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+        '& .pro-menu-item.active': {
+          color: '#6870fa !important',
         },
       }}
     >
@@ -63,17 +61,12 @@ const Sidebar = () => {
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0 20px 0",
+              margin: '10px 0 20px 0',
               color: colors.grey[100],
             }}
           >
             {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
+              <Box display="flex" justifyContent="space-between" alignItems="center" ml="15px">
                 <Typography variant="h5" color={colors.grey[100]}>
                   SPHERE SAMPLE DATA
                 </Typography>
@@ -84,7 +77,7 @@ const Sidebar = () => {
             )}
           </MenuItem>
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? undefined : '10%'}>
             <Item
               title="Dashboard"
               to="/"
@@ -93,11 +86,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
+            <Typography variant="h6" color={colors.grey[300]} sx={{ m: '15px 0 5px 20px' }}>
               Data
             </Typography>
             <Item
@@ -108,11 +97,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
+            <Typography variant="h6" color={colors.grey[300]} sx={{ m: '15px 0 5px 20px' }}>
               Charts
             </Typography>
             <Item
@@ -129,25 +114,11 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Radial Chart"
-              to="/radial"
-              icon={<DonutLargeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
           </Box>
         </Menu>
       </ProSidebar>
     </Box>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

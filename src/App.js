@@ -26,8 +26,6 @@ function App() {
               <Route path="/sampleData" element={<SampleData />} />
               <Route path="/bar" element={<BarChart />} />
               <Route path="/pie" element={<PieChart />} />
-              {/* <Route path="/line" element={<Line />} /> */}
-              {/* <Route path="/radial" element={<Radial />} /> */}
             </Routes>
           </main>
         </div>
