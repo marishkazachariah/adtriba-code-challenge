@@ -38,60 +38,63 @@ const yAxisOptions = ['attributed_conversions', 'attributed_revenue', 'spends']
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const [yAxis, setYAxis] = useState(['attributed_conversions', 'attributed_revenue', 'spends'])
+  const [yAxis, setYAxis] = useState(yAxisOptions)
+  const initEndDate = isDashboard ? mockData[1000].date : mockData[mockData.length - 1].date
   const [startDate, setStartDate] = useState(mockData[0].date)
-  const [endDate, setEndDate] = useState(mockData[mockData.length - 1].date)
+  const [endDate, setEndDate] = useState(initEndDate)
 
   return (
     <>
-      <Box display="flex" justifyContent="center" alignItems="center" gap={20}>
-        <Box display="flex" gap={4}>
-          <input
-            type="date"
-            value={startDate}
-            min={mockData[0].date}
-            max={mockData[mockData.length - 1].date}
-            onChange={(event) => setStartDate(event.target.value)}
-          />
-          <input
-            type="date"
-            value={endDate}
-            min={mockData[0].date}
-            max={mockData[mockData.length - 1].date}
-            onChange={(event) => setEndDate(event.target.value)}
-          />
+      {!isDashboard && (
+        <Box display="flex" justifyContent="center" alignItems="center" gap={20}>
+          <Box display="flex" gap={4}>
+            <input
+              type="date"
+              value={startDate}
+              min={mockData[0].date}
+              max={mockData[mockData.length - 1].date}
+              onChange={(event) => setStartDate(event.target.value)}
+            />
+            <input
+              type="date"
+              value={endDate}
+              min={mockData[0].date}
+              max={mockData[mockData.length - 1].date}
+              onChange={(event) => setEndDate(event.target.value)}
+            />
+          </Box>
+          <Box>
+            {yAxisOptions.map((opt) => (
+              <>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        defaultChecked
+                        value={opt}
+                        onChange={() => {
+                          if (yAxis.includes(opt)) {
+                            setYAxis(yAxis.filter((val) => val !== opt))
+                          } else {
+                            setYAxis(yAxis.concat(opt))
+                          }
+                        }}
+                        sx={{
+                          color: colors.grey[100],
+                          '&.Mui-checked': {
+                            color: colors.primary[100],
+                          },
+                        }}
+                      />
+                    }
+                    label={opt}
+                  />
+                </FormGroup>
+              </>
+            ))}
+          </Box>
         </Box>
-        <Box>
-          {yAxisOptions.map((opt) => (
-            <>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      defaultChecked
-                      value={opt}
-                      onChange={() => {
-                        if (yAxis.includes(opt)) {
-                          setYAxis(yAxis.filter((val) => val !== opt))
-                        } else {
-                          setYAxis(yAxis.concat(opt))
-                        }
-                      }}
-                      sx={{
-                        color: colors.grey[100],
-                        '&.Mui-checked': {
-                          color: colors.primary[100],
-                        },
-                      }}
-                    />
-                  }
-                  label={opt}
-                />
-              </FormGroup>
-            </>
-          ))}
-        </Box>
-      </Box>
+      )}
 
       <ResponsiveBar
         data={transformData({ data: mockData, startDate, endDate })}
@@ -120,6 +123,12 @@ const BarChart = ({ isDashboard = false }) => {
           legends: {
             text: {
               fill: colors.grey[100],
+            },
+          },
+          tooltip: {
+            container: {
+              background: colors.grey[300],
+              color: colors.primary[400],
             },
           },
         }}
