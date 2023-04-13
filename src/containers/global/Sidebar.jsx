@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import 'react-pro-sidebar/dist/css/styles.css'
 import { tokens } from '../../theme'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
-import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined'
+import TableViewIcon from '@mui/icons-material/TableView'
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined'
 import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
@@ -38,6 +38,9 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
+        '& .pro-sidebar': {
+          height: '850px',
+        },
         '& .pro-sidebar-inner': {
           background: `${colors.primary[400]} !important`,
         },
@@ -92,7 +95,7 @@ const Sidebar = () => {
             <Item
               title="Sample Data"
               to="/sampleData"
-              icon={<PeopleOutlinedIcon />}
+              icon={<TableViewIcon />}
               selected={selected}
               setSelected={setSelected}
             />

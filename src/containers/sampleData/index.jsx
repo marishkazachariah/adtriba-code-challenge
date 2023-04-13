@@ -53,7 +53,10 @@ const SampleData = () => {
 
   return (
     <Box m="20px">
-      <Header title="Sample Data" subtitle="List of Sample Data" />
+      <Header
+        title="Sphere Sample Data"
+        subtitle="List of all data you can search, filter, and sort"
+      />
       <Box
         m="40px 0 0 0"
         height="75vh"

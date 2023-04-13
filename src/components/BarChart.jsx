@@ -3,13 +3,17 @@ import { ResponsiveBar } from '@nivo/bar'
 import { tokens } from '../theme'
 import { mockData } from '../data/mockData'
 import { useState } from 'react'
+import { Box, Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
-const transformData = ({ data, date }) => {
-  const filteredData = date ? data.filter((item) => item.date === date) : data
-  // to add date range
-  //   const filteredData = startDate && endDate ? data.filter((item) => {
-  //     return new Date(item.date) >= new Date(startDate) && new Date(item.date) <= new Date(endDate)
-  //   }) : data
+const transformData = ({ data, startDate, endDate }) => {
+  const filteredData =
+    startDate && endDate
+      ? data.filter((item) => {
+          return (
+            new Date(item.date) >= new Date(startDate) && new Date(item.date) <= new Date(endDate)
+          )
+        })
+      : data
   const map = filteredData.reduce((acc, val) => {
     acc[val.date] = {
       ...acc[val.date],
@@ -35,40 +39,63 @@ const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [yAxis, setYAxis] = useState(['attributed_conversions', 'attributed_revenue', 'spends'])
-  const [date, setDate] = useState('')
+  const [startDate, setStartDate] = useState(mockData[0].date)
+  const [endDate, setEndDate] = useState(mockData[mockData.length - 1].date)
 
   return (
     <>
-      <input
-        type="date"
-        value={date}
-        min={mockData[0].date}
-        max={mockData[mockData.length - 1].date}
-        onChange={(event) => setDate(event.target.value)}
-      />
-      {yAxisOptions.map((opt) => (
-        <>
+      <Box display="flex" justifyContent="center" alignItems="center" gap={20}>
+        <Box display="flex" gap={4}>
           <input
-            key={opt}
-            type="checkbox"
-            id={opt}
-            checked={yAxis.includes(opt)}
-            onChange={() => {
-              if (yAxis.includes(opt)) {
-                setYAxis(yAxis.filter((val) => val !== opt))
-              } else {
-                setYAxis(yAxis.concat(opt))
-              }
-            }}
+            type="date"
+            value={startDate}
+            min={mockData[0].date}
+            max={mockData[mockData.length - 1].date}
+            onChange={(event) => setStartDate(event.target.value)}
           />
-          <label htmlFor={opt}>{opt}</label>
-        </>
-      ))}
+          <input
+            type="date"
+            value={endDate}
+            min={mockData[0].date}
+            max={mockData[mockData.length - 1].date}
+            onChange={(event) => setEndDate(event.target.value)}
+          />
+        </Box>
+        <Box>
+          {yAxisOptions.map((opt) => (
+            <>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      defaultChecked
+                      value={opt}
+                      onChange={() => {
+                        if (yAxis.includes(opt)) {
+                          setYAxis(yAxis.filter((val) => val !== opt))
+                        } else {
+                          setYAxis(yAxis.concat(opt))
+                        }
+                      }}
+                      sx={{
+                        color: colors.grey[100],
+                        '&.Mui-checked': {
+                          color: colors.primary[100],
+                        },
+                      }}
+                    />
+                  }
+                  label={opt}
+                />
+              </FormGroup>
+            </>
+          ))}
+        </Box>
+      </Box>
 
       <ResponsiveBar
-        data={transformData({ data: mockData, date })}
+        data={transformData({ data: mockData, startDate, endDate })}
         theme={{
-          // added
           axis: {
             domain: {
               line: {
@@ -98,7 +125,7 @@ const BarChart = ({ isDashboard = false }) => {
         }}
         keys={yAxis}
         indexBy={'date'}
-        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+        margin={{ top: 0, right: 130, bottom: 100, left: 80 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
@@ -132,18 +159,18 @@ const BarChart = ({ isDashboard = false }) => {
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: 0,
-          legend: isDashboard ? undefined : 'date', // changed
+          tickRotation: 40,
+          legend: isDashboard ? undefined : 'Date',
           legendPosition: 'middle',
-          legendOffset: 32,
+          legendOffset: 70,
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: isDashboard ? undefined : yAxis, // changed
+          legend: isDashboard ? undefined : yAxis.join(', '),
           legendPosition: 'middle',
-          legendOffset: -40,
+          legendOffset: -70,
         }}
         enableLabel={false}
         labelSkipWidth={12}

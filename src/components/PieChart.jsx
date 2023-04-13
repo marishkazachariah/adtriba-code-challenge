@@ -1,5 +1,4 @@
 import { ResponsivePie } from '@nivo/pie'
-import { ResponsiveRadialBar } from '@nivo/radial-bar'
 import { tokens } from '../theme'
 import { useTheme } from '@mui/material'
 import { mockData } from '../data/mockData'

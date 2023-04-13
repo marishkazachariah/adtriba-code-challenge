@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { ColorModeContext, useMode } from './theme'
 import { Routes, Route } from 'react-router-dom'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import Topbar from './scenes/global/Topbar'
-import Sidebar from './scenes/global/Sidebar'
-import Dashboard from './scenes/dashboard'
-import SampleData from './scenes/sampleData'
-import BarChart from './components/BarChart'
-import PieChart from './components/PieChart'
+import Topbar from './containers/global/Topbar'
+import Sidebar from './containers/global/Sidebar'
+import Dashboard from './containers/dashboard'
+import SampleData from './containers/sampleData'
+import Bar from './containers/bar'
+import Pie from './containers/pie'
 
 function App() {
   const [theme, colorMode] = useMode()
@@ -24,8 +24,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/sampleData" element={<SampleData />} />
-              <Route path="/bar" element={<BarChart />} />
-              <Route path="/pie" element={<PieChart />} />
+              <Route path="/bar" element={<Bar />} />
+              <Route path="/pie" element={<Pie />} />
             </Routes>
           </main>
         </div>
