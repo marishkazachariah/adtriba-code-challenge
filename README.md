@@ -1,5 +1,6 @@
 # Atriba Code Challenge
 
+[Link](https://marishkazachariah.github.io/adtriba-code-challenge/) to Dashboard
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Packages used
