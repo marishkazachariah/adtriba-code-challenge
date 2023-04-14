@@ -32,6 +32,8 @@ Both these graphs can be viewed and interacted with in greater detail when click
 
 - Sort out components better so they are broken down without need of functions. Break it down for better reusability and readability
 
+- Display loader before rendering chart components (especially for Bar Graph)
+
 - improved readability of dates - either set a limit on the graph or adjust the font/styling
 
 - working on backend implementation for generating the `.csv` file into a proper database
