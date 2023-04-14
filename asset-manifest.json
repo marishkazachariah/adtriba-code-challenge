@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/adtriba-code-challenge/static/css/main.f1940cfe.css",
-    "main.js": "/adtriba-code-challenge/static/js/main.57e39c92.js",
+    "main.js": "/adtriba-code-challenge/static/js/main.bdc6e68a.js",
     "index.html": "/adtriba-code-challenge/index.html",
     "main.f1940cfe.css.map": "/adtriba-code-challenge/static/css/main.f1940cfe.css.map",
-    "main.57e39c92.js.map": "/adtriba-code-challenge/static/js/main.57e39c92.js.map"
+    "main.bdc6e68a.js.map": "/adtriba-code-challenge/static/js/main.bdc6e68a.js.map"
   },
   "entrypoints": [
     "static/css/main.f1940cfe.css",
-    "static/js/main.57e39c92.js"
+    "static/js/main.bdc6e68a.js"
   ]
 }
