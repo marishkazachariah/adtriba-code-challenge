@@ -23,6 +23,7 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/adtriba-code-challenge" element={<Dashboard />} />
               <Route path="/sampleData" element={<SampleData />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
