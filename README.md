@@ -16,17 +16,29 @@ The bar graph represents data spans across all the dates provided and totaling t
 The pie chart can be categorized between the many different types of advertising sources, optimisation target, and type, toting up all the `attributed_conversions`, `attributed_revenue` and `spends` from all 6 months.
 Both these graphs can be viewed and interacted with in greater detail when clicking on the graphs on the sidebar. Otherwise, the dashboard shows an overarching feature with a couple stats highlighting to the user any averages and comparisons in a wider view.
 
+## Challenges
+
+- Figuring out how to best display the data given the amount of fields and data. I decided to split it between qualitative and quantitative data, with one being manipulated by the dates, and other by the various qualitative types
+
+- Time spent on both figuring out [nivo](<(https://nivo.rocks/)>) to build charts from the data
+
+- I had trouble with mui's date picker and didn’t want to fuss on it, putting more focus on dynamic interactability
+
 ## Nice to haves
 
-- would add tests for components and functions
+- Would add tests for components and functions
 
-- sort out components better. break it down for better reusability and readability
+- Would setup the project with TypeScript
 
-- having trouble with MUI date picker and didn’t want to fuss on it, putting more focus on dynamic interactability
+- Sort out components better so they are broken down without need of functions. Break it down for better reusability and readability
 
 - improved readability of dates - either set a limit on the graph or adjust the font/styling
 
 - working on backend implementation for generating the `.csv` file into a proper database
+
+- Adding a couple more charts to showcase the fields further, like a radial graph
+
+- Work on keeping the colors with each value consistent to each chart, as it currenly updates when you alter any values on the chart `onChange`
 
 ## React App Scripts
 
