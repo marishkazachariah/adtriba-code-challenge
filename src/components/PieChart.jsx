@@ -4,17 +4,14 @@ import { Box, useTheme } from '@mui/material'
 import { mockData } from '../data/mockData'
 import { useState } from 'react'
 
-const transformData = ({ data }) => {
-  // change .source to "type" and "optimisation_target"
-  // change .spends to the other amounts
-
+const transformData = ({ data, valType, valNum }) => {
   const map = data.reduce((acc, val) => {
-    acc[val.source] = {
-      ...acc[val.source],
+    acc[val[valType]] = {
+      ...acc[val[valType]],
       ...val,
-      value: (parseInt(acc[val.source]?.spends) || 0) + parseInt(val.spends),
+      value: (parseInt(acc[val[valType]]?.valNum) || 0) + parseInt(val[valNum]),
 
-      id: val.source,
+      id: val[valType],
     }
 
     return acc
@@ -24,41 +21,63 @@ const transformData = ({ data }) => {
   return result
 }
 
-const dropDownOptions = [
-  'attributed_conversions',
-  'attributed_revenue',
-  'spends',
-  'optimisation_target',
-  'type',
-]
+const dropDownTypeOptions = ['source', 'optimisation_target', 'type']
+const dropDownNumOptions = ['attributed_conversions', 'attributed_revenue', 'spends']
 
 const PieChart = ({ isDashboard = false }) => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const [value, setValue] = useState('spends')
+  const [valueType, setValueType] = useState('source')
+  const [valueNum, setValueNum] = useState('attributed_conversions')
+
   return (
     <>
       {!isDashboard && (
-        <Box display="flex">
-          <label htmlFor="dropDownOptions">Choose a option to compare sources with:</label>
-          <select name="dropdownOptions" style={{ marginLeft: 6 }}>
-            {dropDownOptions.map((opt) => (
-              <option
-                value={opt}
-                onClick={(e) => {
-                  console.log(value)
-
-                  setValue(e.target.value)
-                }}
-              >
-                {opt}
-              </option>
-            ))}
-          </select>
+        <Box display="flex" flexDirection="column" gap={3}>
+          <Box>
+            <label htmlFor="dropDownValTypeOptions">
+              Choose between source (adbertising sources/channels), optimisation_target (conversions
+              or revenue) and type (baseline (marketing organic channels) or incrementality
+              (marketing paid channels)):
+            </label>
+            <select
+              name="dropDownValTypeOptions"
+              style={{ marginLeft: 6 }}
+              onChange={(e) => {
+                setValueType(e.target.value)
+              }}
+            >
+              {dropDownTypeOptions.map((opt) => (
+                <option value={opt} key={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </Box>
+          <Box>
+            <label htmlFor="dropDownNumTypeOptions">
+              Compare qualitative between the following quantitative fields: attributed_conversions,
+              attributed_revenue, and spends
+            </label>
+            <select
+              name="dropDownNumTypeOptions"
+              style={{ marginLeft: 6 }}
+              onChange={(e) => {
+                setValueNum(e.target.value)
+              }}
+            >
+              {dropDownNumOptions.map((opt) => (
+                <option value={opt} key={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </Box>
         </Box>
       )}
+
       <ResponsivePie
-        data={transformData({ data: mockData, dynamicValue: 'spends' })}
+        data={transformData({ data: mockData, valType: valueType, valNum: valueNum })}
         theme={{
           axis: {
             domain: {
