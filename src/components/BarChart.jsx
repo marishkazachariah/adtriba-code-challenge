@@ -64,14 +64,16 @@ const BarChart = ({ isDashboard = false }) => {
             />
           </Box>
           <Box>
-            {yAxisOptions.map((opt) => (
-              <>
-                <FormGroup>
+            <FormGroup>
+              {yAxisOptions.map((opt) => (
+                <>
                   <FormControlLabel
+                    key={opt}
                     control={
                       <Checkbox
                         defaultChecked
                         value={opt}
+                        key={opt}
                         onChange={() => {
                           if (yAxis.includes(opt)) {
                             setYAxis(yAxis.filter((val) => val !== opt))
@@ -89,9 +91,9 @@ const BarChart = ({ isDashboard = false }) => {
                     }
                     label={opt}
                   />
-                </FormGroup>
-              </>
-            ))}
+                </>
+              ))}
+            </FormGroup>
           </Box>
         </Box>
       )}
