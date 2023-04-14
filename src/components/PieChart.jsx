@@ -1,6 +1,6 @@
 import { ResponsivePie } from '@nivo/pie'
 import { tokens } from '../theme'
-import { Box, useTheme } from '@mui/material'
+import { Box, InputLabel, MenuItem, Select, useTheme } from '@mui/material'
 import { mockData } from '../data/mockData'
 import { useState } from 'react'
 import { transformPieChartData } from '../utils'
@@ -13,49 +13,50 @@ const PieChart = ({ isDashboard = false }) => {
   const colors = tokens(theme.palette.mode)
   const [valueType, setValueType] = useState('source')
   const [valueNum, setValueNum] = useState('attributed_conversions')
-
   return (
     <>
       {!isDashboard && (
         <Box display="flex" flexDirection="column" gap={3}>
           <Box>
-            <label htmlFor="dropDownValTypeOptions">
+            <InputLabel htmlFor="dropDownValTypeOptions">
               Choose between source (adbertising sources/channels), optimisation_target (conversions
               or revenue) and type (baseline (marketing organic channels) or incrementality
               (marketing paid channels)):
-            </label>
-            <select
+            </InputLabel>
+            <Select
               name="dropDownValTypeOptions"
-              style={{ marginLeft: 6 }}
+              sx={{ marginLeft: 1, width: '12%', mt: 1 }}
+              defaultValue={valueType}
               onChange={(e) => {
                 setValueType(e.target.value)
               }}
             >
               {dropDownTypeOptions.map((opt) => (
-                <option value={opt} key={opt}>
+                <MenuItem value={opt} key={opt}>
                   {opt}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </Select>
           </Box>
           <Box>
-            <label htmlFor="dropDownNumTypeOptions">
+            <InputLabel htmlFor="dropDownNumTypeOptions" sx>
               Compare qualitative between the following quantitative fields: attributed_conversions,
-              attributed_revenue, and spends
-            </label>
-            <select
-              name="dropDownNumTypeOptions"
-              style={{ marginLeft: 6 }}
+              attributed_revenue, and spends:
+            </InputLabel>
+            <Select
+              name="dropDownValTypeOptions"
+              sx={{ marginLeft: 1, width: '12%', mt: 1 }}
+              defaultValue={valueNum}
               onChange={(e) => {
                 setValueNum(e.target.value)
               }}
             >
               {dropDownNumOptions.map((opt) => (
-                <option value={opt} key={opt}>
+                <MenuItem value={opt} key={opt}>
                   {opt}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </Select>
           </Box>
         </Box>
       )}
