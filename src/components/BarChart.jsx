@@ -4,34 +4,7 @@ import { tokens } from '../theme'
 import { mockData } from '../data/mockData'
 import { useState } from 'react'
 import { Box, Checkbox, FormControlLabel, FormGroup } from '@mui/material'
-
-const transformData = ({ data, startDate, endDate }) => {
-  const filteredData =
-    startDate && endDate
-      ? data.filter((item) => {
-          return (
-            new Date(item.date) >= new Date(startDate) && new Date(item.date) <= new Date(endDate)
-          )
-        })
-      : data
-  const map = filteredData.reduce((acc, val) => {
-    acc[val.date] = {
-      ...acc[val.date],
-      ...val,
-      attributed_conversions:
-        (parseInt(acc[val.date]?.attributed_conversions) || 0) +
-        parseInt(val.attributed_conversions),
-      attributed_revenue:
-        (parseInt(acc[val.date]?.attributed_revenue) || 0) + parseInt(val.attributed_revenue),
-      spends: (parseInt(acc[val.date]?.spends) || 0) + parseInt(val.spends),
-    }
-
-    return acc
-  }, {})
-
-  const result = Object.values(map)
-  return result
-}
+import { transformBarGraphData } from '../utils'
 
 const yAxisOptions = ['attributed_conversions', 'attributed_revenue', 'spends']
 
@@ -99,7 +72,7 @@ const BarChart = ({ isDashboard = false }) => {
       )}
 
       <ResponsiveBar
-        data={transformData({ data: mockData, startDate, endDate })}
+        data={transformBarGraphData({ data: mockData, startDate, endDate })}
         theme={{
           axis: {
             domain: {

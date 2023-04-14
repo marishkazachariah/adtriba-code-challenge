@@ -3,23 +3,7 @@ import { tokens } from '../theme'
 import { Box, useTheme } from '@mui/material'
 import { mockData } from '../data/mockData'
 import { useState } from 'react'
-
-const transformData = ({ data, valType, valNum }) => {
-  const map = data.reduce((acc, val) => {
-    acc[val[valType]] = {
-      ...acc[val[valType]],
-      ...val,
-      value: (parseInt(acc[val[valType]]?.valNum) || 0) + parseInt(val[valNum]),
-
-      id: val[valType],
-    }
-
-    return acc
-  }, {})
-
-  const result = Object.values(map)
-  return result
-}
+import { transformPieChartData } from '../utils'
 
 const dropDownTypeOptions = ['source', 'optimisation_target', 'type']
 const dropDownNumOptions = ['attributed_conversions', 'attributed_revenue', 'spends']
@@ -77,7 +61,7 @@ const PieChart = ({ isDashboard = false }) => {
       )}
 
       <ResponsivePie
-        data={transformData({ data: mockData, valType: valueType, valNum: valueNum })}
+        data={transformPieChartData({ data: mockData, valType: valueType, valNum: valueNum })}
         theme={{
           axis: {
             domain: {
